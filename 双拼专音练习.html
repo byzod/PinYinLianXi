@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta version="0.1.65" />
+	<title>双拼专音练习</title>
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%22-0.11em%22 y=%2270%22 font-size=%2270%22 letter-spacing=%22-0.93em%22>🍎🍎</text></svg>" />
+	<link rel="stylesheet" href="data/main.css" />
+	<link rel="stylesheet" href="data/statsbox.css" />
+</head>
+<body>
+	<div class="header">
+	</div>
+	<div class="interact">
+		<div class="hanziBox">
+			<div class="hanzi hanzi-3">_</div>
+			<div class="hanzi hanzi-2">_</div>
+			<div class="hanzi hanzi-1">_</div>
+			<div class="pinyinHint hidden"></div>
+		</div>
+		<div class="inputBox">
+			<div class="inputTextarea"></div>
+		</div>
+		<dialog class="statsBox dialog flexbox-v hidden">
+			<div class="groupLabel">
+				<label>统计</label>
+			</div>
+			<div class="content">
+				<div class="statsBtns flexbox-v">
+					<button class="statsBtn filterBtn showAll active" do="all">全部</button>
+					<button class="statsBtn filterBtn showSm" do="sm">声母</button>
+					<button class="statsBtn filterBtn showYm" do="ym">韵母</button>
+					<button class="statsBtn filterBtn showYj" do="yj">音节</button>
+					<span class="splitter-h"></span>
+					<button class="statsBtn range" do="show">范围</button>
+					<button class="statsBtn close">关闭</button>
+				</div>
+				<textarea class="viewBox"></textarea>
+			</div>
+			<dialog class="statsRangeBox dialog flexbox-v hidden">
+				<div class="groupLabel">
+					<label>统计显示范围过滤</label>
+				</div>
+				<form class="content flexbox-v" id="rangeForm">
+					<fieldset class="rangeSubGroup rangeDate flexbox-v">
+						<legend>日期</legend>
+						<div class="flexbox-h">
+							<span>从&nbsp;</span>
+							<input type="date" class="rangeDateFrom"/>
+							<span>&nbsp;到&nbsp;</span>
+							<input type="date" class="rangeDateTo"/>
+						</div>
+						<div class="rangeBtns flexbox-h">
+							<button type="button" class="rangeBtn today" do="today">今天</button>
+							<button type="button" class="rangeBtn lastWeek" do="lastWeek">近一周</button>
+							<button type="button" class="rangeBtn lastMonth" do="lastMonth">近一月</button>
+							<button type="button" class="rangeBtn lastYear" do="lastYear">近一年</button>
+							<button type="button" class="rangeBtn allTime" do="allTime">全部</button>
+						</div>
+					</fieldset>
+					<fieldset class="rangeSubGroup rangeSession flexbox-h">
+						<legend>会话 (多选)</legend>
+						<select class="rangeSession" multiple size="6">
+						</select>
+					</fieldset>
+				</form>
+				<div class="rangeSubGroup rangeBtns flexbox-h">
+					<button type="button" class="rangeBtn submit" do="submit">确定</button>
+					<button type="button" class="rangeBtn cancel" do="cancel">取消</button>
+					<button type="button" class="rangeBtn reset" do="reset">重置</button>
+				</div>
+			</dialog>
+		</dialog>
+	</div>
+	
+	<div class="settingsToggle">
+		<button class="settingsToggleBtn">设置💬</button>
+	</div>
+	<div class="settings">
+		<div class="shengmu settingboxes">
+			<div class="groupLabel">
+				<label>包含声母</label>
+			</div>
+			<button class="checkBtn shengmu checkAll"    cat="shengmu" do="checkAll"   >全选</button>
+			<button class="checkBtn shengmu checkRevert" cat="shengmu" do="checkRevert">反选</button>
+			<button class="checkBtn shengmu checkNone"   cat="shengmu" do="checkNone"  >清空</button>
+		</div>
+		<div class="yunmu settingboxes">
+			<div class="groupLabel">
+				<label>包含韵母</label>
+			</div>
+			<button class="checkBtn yunmu checkAll"    cat="yunmu" do="checkAll"   >全选</button>
+			<button class="checkBtn yunmu checkRevert" cat="yunmu" do="checkRevert">反选</button>
+			<button class="checkBtn yunmu checkNone"   cat="yunmu" do="checkNone"  >清空</button>
+		</div>
+		<div class="yinjie settingboxes">
+			<div class="groupLabel">
+				<label>包含单音节</label>
+			</div>
+			<button class="checkBtn yinjie checkAll"    cat="yinjie" do="checkAll"   >全选</button>
+			<button class="checkBtn yinjie checkRevert" cat="yinjie" do="checkRevert">反选</button>
+			<button class="checkBtn yinjie checkNone"   cat="yinjie" do="checkNone"  >清空</button>
+		</div>
+		<div class="vertical settingboxes">
+			<div class="plans vSubSettingboxes">
+				<div class="groupLabel">
+					<label>双拼方案</label>
+				</div>
+				<select class="sp-plan-input settingdropbox">
+				</select>
+			</div>
+			<div class="noise vSubSettingboxes">
+				<div class="groupLabel">
+					<label>干扰项</label>
+				</div>
+				<input class="noise-input settingSlider" type="range" min=0 max=50 list="noiselist">
+				</input>
+				<datalist id="noiselist">
+					<option value="0" label="0%"></option>
+					<option class="current" value="25" label="[]"></option>
+					<option value="50" label="50%"></option>
+				</datalist>
+			</div>
+			<div class="auto-hide-settings vSubSettingboxes">
+				<div class="groupLabel">
+					<label>自动关闭设置</label>
+				</div>
+				<input type="checkbox" class="settingcheckbox auto-hide-input" id="auto-hide-input" />
+				<label for="auto-hide-input" class="settingLabel">开始练习时关闭设置</label>
+			</div>
+			<div class="hint vSubSettingboxes">
+				<div class="groupLabel">
+					<label>拼音提示 <span class="help" data-help="-1 = 不显示提示 &#xa 0 = 一直显示提示 &#xa 数字 = 设置显示提示前的错误次数">ℹ️</span></label>
+				</div>
+				<label for="hint-input" class="settingLabel">错误</label>
+				<input type="number" min="-1" max="999" class="settingNumber hint-input" id="hint-input" />
+				<label for="hint-input" class="settingLabel">次后提示读音</label>
+			</div>
+			<div class="stats vSubSettingboxes">
+				<div class="groupLabel">
+					<label>统计</label>
+				</div>
+				<button class="statsBtn statsShow"  cat="stats" do="statsShow"  >显示统计</button>
+				<button class="statsBtn statsClear" cat="stats" do="statsClear" >清除⚠️</button>
+			</div>
+		</div>
+		<div class="help settingboxes">
+			<div class="groupLabel">
+				<label>说明</label>
+			</div>
+			<p>
+				💡 <kbd>F1</kbd> 开关设置
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置会自动保存
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(除非你直接关闭浏览器)
+			</p>
+			<p>
+				💡 <kbd>F5</kbd> 可刷新汉字序列
+			</p>
+			<p>
+				💡 <kbd>Enter</kbd> 可跳过当前字
+			</p>
+			<p>
+				💡 <kbd>Backspace</kbd> <kbd>Delete</kbd>
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可删除输入的音节
+			</p>
+			<p>
+				💡 <kbd>Esc</kbd>
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可关闭统计窗口
+			</p>
+		</div>
+	</div>
+	
+	<script src="data/LoadHanzi.js"></script>
+	<script src="data/LoadSPPlan.js"></script>
+	<script src="data/LoadPinYin.js"></script>
+	<script src="data/Hanzi.js"></script>
+	<script src="data/Settings.js"></script>
+	<script src="data/Plans.js"></script>
+	<script src="data/Gui.js"></script>
+	<script src="data/Statistic.js"></script>
+	<script src="data/PinYin_LianXi.js"></script>
+	<script>
+		let App = new PinYin_LianXi();
+		App.init();
+	</script>
+</body>
+</html>

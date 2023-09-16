@@ -1,0 +1,116 @@
+.dialog {
+	position: fixed;
+	background: #fdfdfd;
+	border:0.2em solid #e9e9e9;
+	border-radius: 0.5em;
+	box-shadow:0 2px 0 #0003, 0 0 0 4px #fff inset;
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+.dialog.hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.1s, visibility 0.1s;
+}
+.flexbox-h{
+	flex-direction: row;
+}
+.flexbox-v{
+	flex-direction: column;
+}
+.statsBox{
+	display: flex;
+	width: 30vw;
+	right: 5vw;
+	height: 70vh;
+	margin-right: 0;
+	z-index: 2147483647;
+}
+.statsRangeBox{
+	display: flex;
+	width: 25vw;
+	right: 7vw;
+	height: auto;
+	max-height: 70vh;
+	margin-right: 0;
+	z-index: 2147483648;
+}
+.statsBox .groupLabel, .statsRangeBox .groupLabel{
+	font-weight: bold;
+	padding: 0.5em 0 0 0;
+}
+.statsBox .content, .statsRangeBox .content{
+	display: flex;
+	overflow: auto;
+	padding: 0.5em;
+	height: 100%;
+}
+.statsRangeBox .rangeSubGroup{
+	display: flex;
+	margin-top: 1em;
+}
+.statsRangeBox .rangeSubGroup .flexbox-h{
+	margin-bottom: 0.5em;
+}
+.statsRangeBox fieldset.rangeSubGroup{
+	border: 2px solid #e9e9e9;
+}
+.statsRangeBox select.rangeSession{
+	min-width: 5em;
+}
+.statsRangeBox .rangeBtns .rangeBtn{
+	font-size: 19px;
+	margin: 0 0.5em;
+	min-width: 3.5em;
+}
+.statsRangeBox .rangeDate .rangeBtns .rangeBtn{
+	font-size: 15px;
+	margin: 0 0.5em 0 0;
+	min-width: 2em;
+}
+.statsRangeBox .rangeBtns .rangeBtn.reset{
+	margin-left: auto;
+}
+.statsBox .statsBtns, .statsBox .viewBox{
+	overflow: auto;
+	padding: 0 0.5em;
+}
+.statsBox .statsBtns{
+	flex: 1;
+	display: flex;
+	max-width: 5em;
+	min-width: 3.5em;
+}
+.statsBox .viewBox{
+	flex: 3;
+	min-width: 7em;
+	border: none;
+	border-left: 2px solid #e9e9e9;
+	margin: 0.5em;
+	padding-left: 1em;
+	resize: none;
+    background: none;
+	font-size: 17px;
+}
+.statsBox .viewBox:focus{
+	outline: none;
+}
+.statsBox .statsBtns .statsBtn, .statsBox .statsBtns .splitter-h{
+	width: 100%;
+	margin: 0 0 0.5em 0;
+	font-size: 19px;
+	transition: border-left 0.1s;
+}
+.statsBox .statsBtns .statsBtn.active{
+	border-left: 0.3em #0075ff solid;
+	transition: border-left 0.2s;
+}
+.statsBox .statsBtns .statsBtn.close{
+	margin-top: auto;
+}
+
+.splitter-h{
+	height: 1px;
+	border-bottom: 2px solid #e9e9e9;
+}
