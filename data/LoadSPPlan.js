@@ -79,7 +79,7 @@ let planData = {
                 "ou" : "ou"
             }
         },
-        "natual" : {
+        "natural" : {
             "name" : "自然码",
             "sm" : {
                 "c" : "c",
